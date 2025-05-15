@@ -324,6 +324,34 @@ border-radius: 50%;
   margin: 0 0 10px 0;
 }
 
+#items-cesta li {
+  margin: 10px 0;
+  background: #f3f3f3;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Botones de cantidad */
+#items-cesta button {
+  margin-left: 5px;
+  padding: 4px 8px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  background-color: #ddd;
+  color: #333;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#items-cesta button:hover {
+  background-color: #bbb;
+}
 
 
 /*contacto*/

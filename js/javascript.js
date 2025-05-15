@@ -160,8 +160,7 @@ btnReiniciar.addEventListener("click", () => {
 mostrarPregunta();
 
 
-//TIENDA
-
+// TIENDA
 
 //array con productos disponibles para la tienda con precios e icono
 const productos = [
@@ -187,7 +186,7 @@ if (cestaGuardada) {
   cesta = JSON.parse(cestaGuardada);
 }
 
-//funcion para mostrar todos los productos disponibles en la tienda
+//función para mostrar todos los productos disponibles en la tienda
 function mostrarProductos() {
   const contenedor = document.getElementById("lista-productos");
   contenedor.innerHTML = "";  // limpiar para no duplicar al reiniciar
@@ -203,66 +202,85 @@ function mostrarProductos() {
   });
 }
 
-//funcion para agregar un producto a la cesta por su indice
+//función para agregar un producto a la cesta por su índice
 function agregarACesta(index) {
-  cesta.push(productos[index]); //añadir productos a array cesta
-  actualizarCesta(); //actualizar vista de la cesta y totales
+  const productoSeleccionado = productos[index];
+  const existente = cesta.find(p => p.nombre === productoSeleccionado.nombre);
+
+  if (existente) {
+    existente.cantidad++;
+  } else {
+    cesta.push({ ...productoSeleccionado, cantidad: 1 });
+  }
+
+  actualizarCesta();
 }
 
-//funcion para actualizar visualmente la cesta, su total y sus botones
+//función para actualizar visualmente la cesta, su total y sus botones
 function actualizarCesta() {
   const lista = document.getElementById("items-cesta");
   const total = document.getElementById("total");
   const contador = document.getElementById("contador-cesta");
   const btnComprar = document.getElementById("btn-comprar");
-    const btnVaciar = document.querySelector("#cesta button[onclick='vaciarCesta()']");
+  const btnVaciar = document.querySelector("#cesta button[onclick='vaciarCesta()']");
 
-    //guadar cesta actualizada en localStorage
-    localStorage.setItem('cesta', JSON.stringify(cesta));
+  //guardar cesta actualizada en localStorage
+  localStorage.setItem('cesta', JSON.stringify(cesta));
 
-  lista.innerHTML = ""; //limpiar lista antes de actualizar
-  let suma = 0; //acumulador del total
+  lista.innerHTML = "";
+  let suma = 0;
 
-  //agregar cada producto en la cesta a la lista 
   cesta.forEach((item, i) => {
-    lista.innerHTML += `<li>${item.nombre} - ${item.precio}€ <button onclick="eliminarDeCesta(${i})">x</button></li>`;
-    suma += item.precio;
+    lista.innerHTML += `
+      <li>
+        ${item.nombre} - ${item.precio}€ x ${item.cantidad}
+        <button onclick="decrementarCantidad(${i})">−</button>
+        <button onclick="incrementarCantidad(${i})">+</button>
+      </li>`;
+    suma += item.precio * item.cantidad;
   });
 
-  //mostrar tortal acumulado y cantidad de producto
   total.innerText = suma + "€";
-  contador.innerText = cesta.length;
-// para que nos botones de la cesta no aparezcan hasta que la cesta no tenga algo )mostrar y ocultar)
+  contador.innerText = cesta.reduce((acc, prod) => acc + prod.cantidad, 0);
+
   const mostrarBotones = cesta.length > 0;
   btnComprar.style.display = mostrarBotones ? "inline-block" : "none";
   btnVaciar.style.display = mostrarBotones ? "inline-block" : "none";
 }
 
-//funcion para eliminar un producto de la cesta
-function eliminarDeCesta(i) {
-  cesta.splice(i, 1); //eliminar producto del array
-  actualizarCesta(); //actualizar vista de la cesta
-}
-//funcion para vaciar toda la cesta (eliminar todos los productos)
-function vaciarCesta() {
-  cesta = []; //limpiar array
-  actualizarCesta(); //actualizar vista y botones
+//funciones para modificar cantidades
+function incrementarCantidad(i) {
+  cesta[i].cantidad++;
+  actualizarCesta();
 }
 
-//funcion para mostrar/ocultar la cesta al pulsar el icono
+function decrementarCantidad(i) {
+  cesta[i].cantidad--;
+  if (cesta[i].cantidad <= 0) {
+    cesta.splice(i, 1);
+  }
+  actualizarCesta();
+}
+
+//función para vaciar toda la cesta
+function vaciarCesta() {
+  cesta = [];
+  actualizarCesta();
+}
+
+//función para mostrar/ocultar la cesta
 function toggleCesta() {
   const cestaDiv = document.getElementById("cesta");
-  cestaVisible = !cestaVisible; //canbiar estado visible/oculto
-  cestaDiv.style.display = cestaVisible ? "block" : "none"; //mostrar u ocultar
+  cestaVisible = !cestaVisible;
+  cestaDiv.style.display = cestaVisible ? "block" : "none";
 }
 
-//funcion que simula la finalizacion de la compra:
-//muestra un mensaje de agradecimienmto, vacia la cesta y oculta la cesta
+//función que simula la compra
 function realizarCompra() {
   alert("¡Gracias por tu compra! 😊");
   vaciarCesta();
   toggleCesta();
 }
 
-// Mostrar productos al cargar la página
+//mostrar productos al cargar la página
 mostrarProductos();
