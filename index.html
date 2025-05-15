@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lauradeoz</title>
+  <link rel="stylesheet" href="css/estilos.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+   <link rel="shortcut icon" href="img/LOGOpng.png">
+</head>
+<body>
+
+<div id="icono-cesta" onclick="toggleCesta()">
+    🛒 <span id="contador-cesta">0</span>
+  </div>
+
+
+<header>
+  <div class="banner">
+   <section class="section-banner">
+      <div class="center-vertical">
+        <img src="img/LOGOpng.png" alt="logo">
+       </div>
+       <div class="container-banner">
+        <h2>Diseño Gráfico</h2>
+         <p>Lauradeoz</p>
+        <a href="#contacto" class="boton">CONTACTO</a>
+        </div>
+   </section>
+</div>
+</header>
+
+
+
+<main>
+  
+    <div class="tienda-contenedor">
+  <div class="productos">
+    <h1>Tienda</h1>
+    <div class="lista-productos" id="lista-productos">
+    </div>
+  </div>
+  <div class="cesta" id="cesta">
+    <h2>Tu cesta</h2>
+    <ul id="items-cesta"></ul>
+    <p>Total: <span id="total">0€</span></p>
+<button id="btnVaciar" onclick="vaciarCesta()">Vaciar cesta</button>
+    <button id="btn-comprar" style="display:none;" onclick="realizarCompra()">Realizar compra</button>
+  </div>
+</div>
+<div class="container-preguntas">
+  <div class="container">
+    <h1>¿Qué estilo de diseño gráfico va más contigo?</h1>
+    <h3>Haz el siguiente cuestionario para saber que estilo se adapta mejor a ti</h3>
+    <div id="quiz"></div>
+    <img id="imagenResultado" class="imagen-estilo" src="" alt="Imagen de estilo" style="display: none;" />
+    <button id="reiniciar" class="hidden">Reiniciar</button>
+  </div>
+</div>
+<section id="contacto" class="section-formulario">
+   <div class="container-contacto">
+  <h2>CONTACTO</h2>
+    <form action="#" method="post">
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="mensaje">Mensaje</label>
+    <textarea id="mensaje" name="mensaje" required></textarea>
+
+    <button type="submit">Enviar</button>
+    </form>
+</section>
+</div>
+</main>
+
+
+
+<footer>
+<p>&copy; 2025 Lauradeoz. Todos los derechos reservados.</p>
+</footer>
+
+
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+  </script>
+  <script src="js/javascript.js"></script>
+</body>
+</html>
