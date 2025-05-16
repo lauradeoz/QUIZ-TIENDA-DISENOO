@@ -310,6 +310,35 @@ border-radius: 50%;
   transition: 0.3s ease ;
 }
 
+.producto {
+  position: relative;
+  padding: 10px;
+  border: 1px solid #ddd;
+  transition: box-shadow 0.2s ease;
+}
+
+.producto:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.descripcion {
+  position: absolute;
+  bottom: 60px;
+  left: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 5px 10px;
+  border: 1px solid #6a1e9b;
+  font-size: 0.85em;
+  display: none;
+  z-index: 10;
+}
+
+.producto:hover .descripcion {
+  display: block;
+}
+
+
 .cesta {
   flex: 1;
   border-left: 2px solid #6a1e9b;

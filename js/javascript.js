@@ -164,15 +164,15 @@ mostrarPregunta();
 
 //array con productos disponibles para la tienda con precios e icono
 const productos = [
-  { nombre: "Logo", precio: 40, img: "img/tienda/logo.jpg" },
-  { nombre: "Tarjeta", precio: 30, img: "img/tienda/tarjeta.jpg" },
-  { nombre: "Papelería", precio: 30, img: "img/tienda/papeleria.jpg" },
-  { nombre: "Publicidad", precio: 45, img: "img/tienda/publicidad.jpg" },
-  { nombre: "Manual de Marca", precio: 240, img: "img/tienda/manual.jpg" },
-  { nombre: "Libro", precio: 50, img: "img/tienda/libro-revista.jpg" },
-  { nombre: "Ilustración", precio: 40, img: "img/tienda/ilustracion.jpg" },
-  { nombre: "Merchandising", precio: 40, img: "img/tienda/merchandising.jpg" },
-  { nombre: "Redes Sociales", precio: 20, img: "img/tienda/redes.jpg" },
+  { nombre: "Logo", precio: 40, img: "img/tienda/logo.jpg", descripcion: "Un logo creado exclusivamente para ti." },
+  { nombre: "Tarjeta", precio: 30, img: "img/tienda/tarjeta.jpg", descripcion:"Una tarjeta diseñada para construir conexión.Enhorabuena, la reunión ha sido un éxito. ¿Por qué no dejar a tu cliente con un mejor sabor de boca entregándole una tarjeta a la altura?"},
+  { nombre: "Papelería", precio: 30, img: "img/tienda/papeleria.jpg", descripcion:"Completa tu imagen corporativa con una bonita papelería. El último toque profesional para tu oficina. Lanza un concursos y nuestros diseñadores crearán para ti una papelería que te encantará." },
+  { nombre: "Publicidad", precio: 45, img: "img/tienda/publicidad.jpg", descripcion:"Flyer, despegables, trípticos, dípticos, folletos, panfletos, cartelería, gigantografía, banner, rotulación." },
+  { nombre: "Manual de Marca", precio: 240, img: "img/tienda/manual.jpg", descripcion:"Convierte tu logo en marca. Un diseñador profesional creará para ti una guía de marca para que puedas trabajar con ella en el futuro." },
+  { nombre: "Libro", precio: 50, img: "img/tienda/libro-revista.jpg", descripcion:"Acabas de escribir el best-seller de la temporada. Ahora solo necesitas una portada que esté a la altura." },
+  { nombre: "Ilustración", precio: 40, img: "img/tienda/ilustracion.jpg", descripcion:"Ninguna imagen cuenta una historia mejor que una bonita ilustración. ¿Necesitas el diseño de un mural o las ilustraciones para un libro?" },
+  { nombre: "Merchandising", precio: 40, img: "img/tienda/merchandising.jpg", descripcion:"¿Quieres vestir a la última moda? ¿Por qué no diseñarla tú mismo? Lanza ahora un concurso de diseño y nuestros diseñadores crearán la camiseta perfecta para ti." },
+  { nombre: "Redes Sociales", precio: 20, img: "img/tienda/redes.jpg", descripcion:"Convierte el tráfico de tu web en número de ventas con una bonita landing page, ese lugar donde tu empresa brillará en la red" },
 ];
 
 //array para guardar los productos añadidos a la cesta
@@ -188,14 +188,15 @@ if (cestaGuardada) {
 
 //función para mostrar todos los productos disponibles en la tienda
 function mostrarProductos() {
-  const contenedor = document.getElementById("lista-productos");
-  contenedor.innerHTML = "";  // limpiar para no duplicar al reiniciar
+ const contenedor = document.getElementById("lista-productos");
+  contenedor.innerHTML = "";
   productos.forEach((producto, index) => {
     contenedor.innerHTML += `
       <div class="producto">
         <img src="${producto.img}" alt="${producto.nombre}">
         <h3>${producto.nombre}</h3>
         <p>${producto.precio}€</p>
+        <div class="descripcion">${producto.descripcion}</div>
         <button onclick="agregarACesta(${index})">Añadir</button>
       </div>
     `;
